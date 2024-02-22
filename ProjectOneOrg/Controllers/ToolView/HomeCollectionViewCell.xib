@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Bold.ttf">
+            <string>Poppins-Bold</string>
+        </array>
+        <array key="Poppins-Regular.ttf">
+            <string>Poppins-Regular</string>
+        </array>
+        <array key="Poppins-SemiBold.ttf">
+            <string>Poppins-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="homeCell" translatesAutoresizingMaskIntoConstraints="NO" id="gTV-IL-0wX" customClass="HomeCollectionViewCell" customModule="LiveRecordHome" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gfw-6o-CVN" userLabel="HomeView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y43-j5-3I1" userLabel="topBar">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="81" translatesAutoresizingMaskIntoConstraints="NO" id="ZSx-gP-Ko4">
+                                        <rect key="frame" x="16" y="0.0" width="382" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DI9-bw-okW">
+                                                <rect key="frame" x="0.0" y="0.0" width="45" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="K7D-ba-HQQ"/>
+                                                    <constraint firstAttribute="width" constant="45" id="wRq-Ec-hPb"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="proLogo"/>
+                                                <connections>
+                                                    <action selector="touchDown:" destination="gTV-IL-0wX" eventType="touchDown" id="rxP-UQ-OCa"/>
+                                                    <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragInside" id="czm-nF-MFP"/>
+                                                    <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragOutside" id="gaf-wn-3HO"/>
+                                                    <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchUpInside" id="yWL-xf-kee"/>
+                                                </connections>
+                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="101" translatesAutoresizingMaskIntoConstraints="NO" id="KWV-VD-1ux">
+                                                <rect key="frame" x="126" y="0.0" width="256" height="40"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIVE RECORD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="s6X-jU-qWE">
+                                                        <rect key="frame" x="0.0" y="0.0" width="131" height="40"/>
+                                                        <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="20"/>
+                                                        <color key="textColor" name="fontColorDark"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fOb-dd-ytg">
+                                                        <rect key="frame" x="232" y="0.0" width="24" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="Phi-r3-qvI"/>
+                                                            <constraint firstAttribute="width" constant="24" id="wDr-A9-6AD"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" image="settings"/>
+                                                        <connections>
+                                                            <action selector="touchDown:" destination="gTV-IL-0wX" eventType="touchDown" id="MrG-Tg-WHr"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Lf6-Q3-AHR"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragOutside" id="n62-vg-LP9"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragInside" id="qce-lM-Z2K"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ZSx-gP-Ko4" firstAttribute="top" secondItem="y43-j5-3I1" secondAttribute="top" id="15Y-JN-C2U"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZSx-gP-Ko4" secondAttribute="trailing" constant="16" id="PzR-Oh-5lM"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZSx-gP-Ko4" secondAttribute="bottom" id="S6o-iL-zc0"/>
+                                    <constraint firstItem="ZSx-gP-Ko4" firstAttribute="leading" secondItem="y43-j5-3I1" secondAttribute="leading" constant="16" id="aou-bj-AI6"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edu-k2-i9y" userLabel="banner">
+                                <rect key="frame" x="0.0" y="40" width="414" height="124"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dBo-DM-Fua">
+                                        <rect key="frame" x="0.0" y="10" width="414" height="104"/>
+                                        <color key="backgroundColor" name="backGround"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Sjo-oT-TWi">
+                                            <size key="itemSize" width="372" height="104"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" name="backGround"/>
+                                <constraints>
+                                    <constraint firstItem="dBo-DM-Fua" firstAttribute="width" secondItem="Edu-k2-i9y" secondAttribute="width" id="FyQ-Od-aze"/>
+                                    <constraint firstItem="dBo-DM-Fua" firstAttribute="leading" secondItem="Edu-k2-i9y" secondAttribute="leading" id="NNW-Do-GeM"/>
+                                    <constraint firstItem="dBo-DM-Fua" firstAttribute="height" secondItem="Edu-k2-i9y" secondAttribute="height" multiplier="0.83871" id="VzV-D2-Fcs"/>
+                                    <constraint firstAttribute="trailing" secondItem="dBo-DM-Fua" secondAttribute="trailing" id="YSG-JG-c7i"/>
+                                    <constraint firstItem="dBo-DM-Fua" firstAttribute="top" secondItem="Edu-k2-i9y" secondAttribute="top" constant="10" id="Zg6-qg-l1k"/>
+                                    <constraint firstAttribute="bottom" secondItem="dBo-DM-Fua" secondAttribute="bottom" constant="10" id="f4z-Yn-gK0"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sua-eM-Vii" userLabel="gap">
+                                <rect key="frame" x="0.0" y="164" width="414" height="38"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZp-Ui-qik" userLabel="Label">
+                                <rect key="frame" x="0.0" y="202" width="414" height="68"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="j4u-Nz-udJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="TAP TO START" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="YTn-q5-gZt">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="24"/>
+                                                <color key="textColor" name="fontColorDark"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="SCREEN RECORDING" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="6P6-ia-ODe">
+                                                <rect key="frame" x="0.0" y="34" width="414" height="34"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="24"/>
+                                                <color key="textColor" name="fontColorDark"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="j4u-Nz-udJ" firstAttribute="leading" secondItem="bZp-Ui-qik" secondAttribute="leading" id="5pP-ui-Nl0"/>
+                                    <constraint firstAttribute="bottom" secondItem="j4u-Nz-udJ" secondAttribute="bottom" id="C3W-um-3VI"/>
+                                    <constraint firstItem="j4u-Nz-udJ" firstAttribute="top" secondItem="bZp-Ui-qik" secondAttribute="top" id="Suf-bj-KvA"/>
+                                    <constraint firstAttribute="trailing" secondItem="j4u-Nz-udJ" secondAttribute="trailing" id="qAY-X9-iWp"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="klR-QI-Z0u" userLabel="mid">
+                                <rect key="frame" x="0.0" y="270" width="414" height="228"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ee4-FZ-wgb">
+                                        <rect key="frame" x="126" y="33" width="162" height="162"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="CenterLogo"/>
+                                        <connections>
+                                            <action selector="touchDown:" destination="gTV-IL-0wX" eventType="touchDown" id="wTB-Sa-ppX"/>
+                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchUpInside" id="1DL-a4-uIO"/>
+                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragInside" id="1qK-cy-BmS"/>
+                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragOutside" id="pc5-KG-gBr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ee4-FZ-wgb" firstAttribute="leading" secondItem="klR-QI-Z0u" secondAttribute="leading" constant="126" id="5jt-RN-mJl"/>
+                                    <constraint firstItem="ee4-FZ-wgb" firstAttribute="centerY" secondItem="klR-QI-Z0u" secondAttribute="centerY" id="7Ri-rB-Xqe"/>
+                                    <constraint firstItem="ee4-FZ-wgb" firstAttribute="top" secondItem="klR-QI-Z0u" secondAttribute="top" constant="33" id="GKZ-Gq-ku8"/>
+                                    <constraint firstAttribute="trailing" secondItem="ee4-FZ-wgb" secondAttribute="trailing" constant="126" id="YLh-o5-lWK"/>
+                                    <constraint firstAttribute="bottom" secondItem="ee4-FZ-wgb" secondAttribute="bottom" constant="33" id="fPw-K8-pWV"/>
+                                    <constraint firstItem="ee4-FZ-wgb" firstAttribute="centerX" secondItem="klR-QI-Z0u" secondAttribute="centerX" id="tIu-xf-csi"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XpK-l9-1Ua" userLabel="menu">
+                                <rect key="frame" x="0.0" y="498" width="414" height="261"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Fk1-U6-68Y">
+                                        <rect key="frame" x="16" y="16" width="382" height="184"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="T0O-fP-9b0">
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="84"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dTS-rU-iLe">
+                                                        <rect key="frame" x="0.0" y="0.0" width="118" height="84"/>
+                                                        <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="12"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="17" maxY="0.0"/>
+                                                        <state key="normal" title="Live Stream" image="internet-1antenna-01">
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Live Stream">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="12" name="Poppins-SemiBold"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <color key="titleColor" name="fontColorDark"/>
+                                                        </state>
+                                                        <buttonConfiguration key="configuration" style="plain" image="live" imagePlacement="top" imagePadding="13" cornerStyle="dynamic">
+                                                            <backgroundConfiguration key="background" cornerRadius="10">
+                                                                <color key="backgroundColor" name="buttonBackGround"/>
+                                                                <color key="strokeColor" name="buttonBackGround"/>
+                                                            </backgroundConfiguration>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="small" weight="thin"/>
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Live Stream">
+                                                                    <attributes>
+                                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                        <font key="NSFont" size="12" name="Poppins-SemiBold"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <color key="baseForegroundColor" name="fontColorDark"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="touchDown:" destination="gTV-IL-0wX" eventType="touchDown" id="aDo-K5-MgR"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchUpInside" id="ONX-10-wph"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragInside" id="X6V-sa-b9y"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragOutside" id="cY5-v0-geO"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7z-gi-I8V">
+                                                        <rect key="frame" x="132" y="0.0" width="118" height="84"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="face" imagePlacement="top" imagePadding="13" cornerStyle="dynamic">
+                                                            <backgroundConfiguration key="background" cornerRadius="10">
+                                                                <color key="backgroundColor" name="buttonBackGround"/>
+                                                                <color key="strokeColor" name="buttonBackGround"/>
+                                                            </backgroundConfiguration>
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Face Cam">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="12" name="Poppins-SemiBold"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <color key="baseForegroundColor" name="fontColorDark"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="touchDown:" destination="gTV-IL-0wX" eventType="touchDown" id="IMC-nx-0Hq"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Oq2-Zs-KAZ"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragInside" id="fZU-oQ-gOW"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragOutside" id="kUs-23-JFJ"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKF-vH-Jfh">
+                                                        <rect key="frame" x="264" y="0.0" width="118" height="84"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="video" imagePlacement="top" imagePadding="13" cornerStyle="dynamic">
+                                                            <backgroundConfiguration key="background" cornerRadius="10">
+                                                                <color key="backgroundColor" name="buttonBackGround"/>
+                                                                <color key="strokeColor" name="buttonBackGround"/>
+                                                            </backgroundConfiguration>
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Video Editor">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="12" name="Poppins-SemiBold"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <color key="baseForegroundColor" name="fontColorDark"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="touchDown:" destination="gTV-IL-0wX" eventType="touchDown" id="E29-h6-ftg"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchUpInside" id="TCl-ge-oc7"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragInside" id="U7O-BA-PT6"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragOutside" id="zoC-Ae-bQ1"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="CaA-h0-BwP">
+                                                <rect key="frame" x="0.0" y="100" width="382" height="84"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jE0-z7-gib">
+                                                        <rect key="frame" x="0.0" y="0.0" width="118" height="84"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="music" imagePlacement="top" imagePadding="13" cornerStyle="dynamic">
+                                                            <backgroundConfiguration key="background" cornerRadius="10">
+                                                                <color key="backgroundColor" name="buttonBackGround"/>
+                                                                <color key="strokeColor" name="buttonBackGround"/>
+                                                            </backgroundConfiguration>
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Add Music">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="12" name="Poppins-SemiBold"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <color key="baseForegroundColor" name="fontColorDark"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="touchDown:" destination="gTV-IL-0wX" eventType="touchDown" id="bzp-7K-6hv"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragOutside" id="Afj-Iw-5Tq"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchUpInside" id="YgO-aF-S77"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragInside" id="bFg-Og-UOP"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6I-pu-0lY">
+                                                        <rect key="frame" x="132" y="0.0" width="118" height="84"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="extract" imagePlacement="top" imagePadding="13" cornerStyle="dynamic">
+                                                            <backgroundConfiguration key="background" cornerRadius="10">
+                                                                <color key="backgroundColor" name="buttonBackGround"/>
+                                                                <color key="strokeColor" name="buttonBackGround"/>
+                                                            </backgroundConfiguration>
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Extract Audio">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="12" name="Poppins-SemiBold"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <color key="baseForegroundColor" name="fontColorDark"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="touchDown:" destination="gTV-IL-0wX" eventType="touchDown" id="GAq-mB-prR"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragInside" id="CTE-hJ-Vf4"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragOutside" id="aoE-Uf-6Tn"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchUpInside" id="wRU-U3-iFp"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43e-Vt-CXs">
+                                                        <rect key="frame" x="264" y="0.0" width="118" height="84"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="17" maxY="0.0"/>
+                                                        <state key="normal" title="More Tools" image="Xotech1 Setting icon"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="moreTools" imagePlacement="top" imagePadding="13" cornerStyle="dynamic">
+                                                            <backgroundConfiguration key="background" cornerRadius="10">
+                                                                <color key="backgroundColor" name="buttonBackGround"/>
+                                                                <color key="strokeColor" name="buttonBackGround"/>
+                                                            </backgroundConfiguration>
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="More Tools">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="12" name="Poppins-SemiBold"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <color key="baseForegroundColor" name="fontColorDark"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="touchDown:" destination="gTV-IL-0wX" eventType="touchDown" id="kaT-PR-5ZS"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchUpInside" id="I52-Ah-3To"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragInside" id="i3b-EB-bwO"/>
+                                                            <action selector="touchUP:" destination="gTV-IL-0wX" eventType="touchDragOutside" id="wiF-zM-NL2"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Fk1-U6-68Y" firstAttribute="leading" secondItem="XpK-l9-1Ua" secondAttribute="leading" constant="16" id="2L7-sd-aBj"/>
+                                    <constraint firstAttribute="bottom" secondItem="Fk1-U6-68Y" secondAttribute="bottom" constant="19" id="MC5-lw-3jz"/>
+                                    <constraint firstAttribute="trailing" secondItem="Fk1-U6-68Y" secondAttribute="trailing" constant="16" id="SoN-GO-ynw"/>
+                                    <constraint firstItem="Fk1-U6-68Y" firstAttribute="top" secondItem="XpK-l9-1Ua" secondAttribute="top" constant="16" id="rJE-9E-rxJ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="backGround"/>
+                        <constraints>
+                            <constraint firstItem="klR-QI-Z0u" firstAttribute="top" secondItem="bZp-Ui-qik" secondAttribute="bottom" id="0ZJ-mY-ARw"/>
+                            <constraint firstItem="Sua-eM-Vii" firstAttribute="leading" secondItem="gfw-6o-CVN" secondAttribute="leading" id="1Tx-S7-ePe"/>
+                            <constraint firstItem="XpK-l9-1Ua" firstAttribute="top" secondItem="klR-QI-Z0u" secondAttribute="bottom" id="4dq-au-gVb"/>
+                            <constraint firstItem="XpK-l9-1Ua" firstAttribute="leading" secondItem="gfw-6o-CVN" secondAttribute="leading" id="8qy-WU-zaF"/>
+                            <constraint firstItem="Edu-k2-i9y" firstAttribute="leading" secondItem="gfw-6o-CVN" secondAttribute="leading" id="96M-Ir-sPk"/>
+                            <constraint firstAttribute="trailing" secondItem="Edu-k2-i9y" secondAttribute="trailing" id="AWq-IG-AXA"/>
+                            <constraint firstAttribute="trailing" secondItem="XpK-l9-1Ua" secondAttribute="trailing" id="Bk3-4E-LJx"/>
+                            <constraint firstItem="Sua-eM-Vii" firstAttribute="width" secondItem="gfw-6o-CVN" secondAttribute="width" id="BrY-AR-TbM"/>
+                            <constraint firstItem="klR-QI-Z0u" firstAttribute="leading" secondItem="gfw-6o-CVN" secondAttribute="leading" id="ESf-8e-HEr"/>
+                            <constraint firstItem="Edu-k2-i9y" firstAttribute="height" secondItem="gfw-6o-CVN" secondAttribute="height" multiplier="0.163373" id="Gjg-Zd-JJs"/>
+                            <constraint firstItem="XpK-l9-1Ua" firstAttribute="width" secondItem="gfw-6o-CVN" secondAttribute="width" id="HRg-rd-R2a"/>
+                            <constraint firstItem="bZp-Ui-qik" firstAttribute="top" secondItem="Sua-eM-Vii" secondAttribute="bottom" id="Hf2-mF-219"/>
+                            <constraint firstItem="Sua-eM-Vii" firstAttribute="top" secondItem="Edu-k2-i9y" secondAttribute="bottom" id="Uhp-JR-oIh"/>
+                            <constraint firstItem="Edu-k2-i9y" firstAttribute="top" secondItem="y43-j5-3I1" secondAttribute="bottom" id="VKF-BN-MJf"/>
+                            <constraint firstItem="bZp-Ui-qik" firstAttribute="top" secondItem="Sua-eM-Vii" secondAttribute="bottom" id="VZx-R4-hIA"/>
+                            <constraint firstAttribute="trailing" secondItem="Sua-eM-Vii" secondAttribute="trailing" id="Xkd-bD-jLO"/>
+                            <constraint firstAttribute="bottom" secondItem="XpK-l9-1Ua" secondAttribute="bottom" id="ZNC-gk-ZM3"/>
+                            <constraint firstItem="Edu-k2-i9y" firstAttribute="top" secondItem="y43-j5-3I1" secondAttribute="bottom" id="aN3-lu-jkf"/>
+                            <constraint firstItem="y43-j5-3I1" firstAttribute="width" secondItem="gfw-6o-CVN" secondAttribute="width" id="bGa-Qb-sJX"/>
+                            <constraint firstItem="XpK-l9-1Ua" firstAttribute="height" secondItem="gfw-6o-CVN" secondAttribute="height" multiplier="0.343874" id="cMD-mq-CQK"/>
+                            <constraint firstItem="bZp-Ui-qik" firstAttribute="leading" secondItem="gfw-6o-CVN" secondAttribute="leading" id="cjY-mM-VQV"/>
+                            <constraint firstItem="klR-QI-Z0u" firstAttribute="top" secondItem="bZp-Ui-qik" secondAttribute="bottom" id="d6R-hW-ZI8"/>
+                            <constraint firstItem="y43-j5-3I1" firstAttribute="height" secondItem="gfw-6o-CVN" secondAttribute="height" multiplier="0.0527009" id="dQy-Bh-8ul"/>
+                            <constraint firstAttribute="trailing" secondItem="y43-j5-3I1" secondAttribute="trailing" id="hdF-0d-Cvh"/>
+                            <constraint firstAttribute="trailing" secondItem="klR-QI-Z0u" secondAttribute="trailing" id="jlg-6P-hK9"/>
+                            <constraint firstItem="Sua-eM-Vii" firstAttribute="height" secondItem="gfw-6o-CVN" secondAttribute="height" multiplier="0.0500659" id="jq5-Dc-lyV"/>
+                            <constraint firstItem="klR-QI-Z0u" firstAttribute="height" secondItem="gfw-6o-CVN" secondAttribute="height" multiplier="0.300395" id="k1Y-E6-xcA"/>
+                            <constraint firstItem="bZp-Ui-qik" firstAttribute="height" secondItem="gfw-6o-CVN" secondAttribute="height" multiplier="0.0895916" id="kAy-Zp-EH9"/>
+                            <constraint firstItem="XpK-l9-1Ua" firstAttribute="top" secondItem="klR-QI-Z0u" secondAttribute="bottom" id="kJn-gE-yQM"/>
+                            <constraint firstItem="klR-QI-Z0u" firstAttribute="width" secondItem="gfw-6o-CVN" secondAttribute="width" id="omL-eM-Icc"/>
+                            <constraint firstItem="bZp-Ui-qik" firstAttribute="width" secondItem="gfw-6o-CVN" secondAttribute="width" id="pWW-2k-1dL"/>
+                            <constraint firstItem="y43-j5-3I1" firstAttribute="leading" secondItem="gfw-6o-CVN" secondAttribute="leading" id="qn5-Zd-8sh"/>
+                            <constraint firstAttribute="trailing" secondItem="bZp-Ui-qik" secondAttribute="trailing" id="qq2-oz-UDq"/>
+                            <constraint firstItem="Sua-eM-Vii" firstAttribute="top" secondItem="Edu-k2-i9y" secondAttribute="bottom" id="qwv-T7-s1N"/>
+                            <constraint firstItem="Edu-k2-i9y" firstAttribute="width" secondItem="gfw-6o-CVN" secondAttribute="width" id="r91-QD-m61"/>
+                            <constraint firstItem="y43-j5-3I1" firstAttribute="top" secondItem="gfw-6o-CVN" secondAttribute="top" id="xHN-fd-Mle"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="gfw-6o-CVN" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="3Nq-iP-Asa"/>
+                <constraint firstItem="gfw-6o-CVN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="45V-Yf-cCY"/>
+                <constraint firstItem="gfw-6o-CVN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="eVa-Y2-gsd"/>
+                <constraint firstAttribute="trailing" secondItem="gfw-6o-CVN" secondAttribute="trailing" id="ock-OB-J9B"/>
+                <constraint firstItem="gfw-6o-CVN" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" id="pCQ-7t-AqP"/>
+                <constraint firstAttribute="bottom" secondItem="gfw-6o-CVN" secondAttribute="bottom" id="wtT-6u-D5e"/>
+            </constraints>
+            <size key="customSize" width="2110" height="2792"/>
+            <connections>
+                <outlet property="bannerCollectionFlow" destination="Sjo-oT-TWi" id="aaa-Dh-mgM"/>
+                <outlet property="bannerCollectionView" destination="dBo-DM-Fua" id="tAK-rH-nj1"/>
+                <outlet property="bannerView" destination="Edu-k2-i9y" id="PZ9-Tu-aO9"/>
+                <outlet property="buttonFive" destination="A6I-pu-0lY" id="fhH-ha-8xd"/>
+                <outlet property="buttonFour" destination="jE0-z7-gib" id="6NE-uu-VNf"/>
+                <outlet property="buttonOne" destination="dTS-rU-iLe" id="Mfa-l9-d4R"/>
+                <outlet property="buttonSix" destination="43e-Vt-CXs" id="zgc-wl-9pa"/>
+                <outlet property="buttonThree" destination="KKF-vH-Jfh" id="G0A-bn-q85"/>
+                <outlet property="buttonTwo" destination="U7z-gi-I8V" id="4XM-bA-rHX"/>
+                <outlet property="homeView" destination="gfw-6o-CVN" id="L2u-Db-IPs"/>
+                <outlet property="mid" destination="ee4-FZ-wgb" id="yCu-z1-PoS"/>
+                <outlet property="pro" destination="DI9-bw-okW" id="kZ7-Ps-rh3"/>
+                <outlet property="screenRecord" destination="6P6-ia-ODe" id="fMM-oH-eFY"/>
+                <outlet property="set" destination="fOb-dd-ytg" id="IVr-MK-jmr"/>
+            </connections>
+            <point key="canvasLocation" x="1613.0434782608697" y="577.56696428571422"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="CenterLogo" width="162" height="162"/>
+        <image name="Xotech1 Setting icon" width="40" height="40"/>
+        <image name="extract" width="40" height="40"/>
+        <image name="face" width="37" height="37"/>
+        <image name="internet-1antenna-01" width="37" height="37"/>
+        <image name="live" width="37" height="37"/>
+        <image name="moreTools" width="40" height="40"/>
+        <image name="music" width="40" height="40"/>
+        <image name="proLogo" width="45" height="40"/>
+        <image name="settings" width="24" height="24"/>
+        <image name="video" width="40" height="40"/>
+        <namedColor name="backGround">
+            <color red="0.9649999737739563" green="0.9649999737739563" blue="0.9649999737739563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="buttonBackGround">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
+        <namedColor name="fontColorDark">
+            <color red="0.023529411764705882" green="0.031372549019607843" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

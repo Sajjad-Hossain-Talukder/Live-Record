@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="bannerCell" translatesAutoresizingMaskIntoConstraints="NO" id="gTV-IL-0wX" customClass="BannerCollectionViewCell" customModule="LiveRecordHome" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="376" height="104"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="376" height="104"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oqn-Jk-FMG">
+                        <rect key="frame" x="0.0" y="0.0" width="376" height="104"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DIK-9X-l7a">
+                                <rect key="frame" x="8" y="0.0" width="360" height="104"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="DIK-9X-l7a" firstAttribute="leading" secondItem="Oqn-Jk-FMG" secondAttribute="leading" constant="8" id="6xK-zx-6xh"/>
+                            <constraint firstItem="DIK-9X-l7a" firstAttribute="top" secondItem="Oqn-Jk-FMG" secondAttribute="top" id="B4U-Sb-OHT"/>
+                            <constraint firstAttribute="trailing" secondItem="DIK-9X-l7a" secondAttribute="trailing" constant="8" id="Mij-Wx-Did"/>
+                            <constraint firstAttribute="bottom" secondItem="DIK-9X-l7a" secondAttribute="bottom" id="Z77-Rg-pzD"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Oqn-Jk-FMG" secondAttribute="bottom" id="OnT-3i-Kbb"/>
+                <constraint firstAttribute="trailing" secondItem="Oqn-Jk-FMG" secondAttribute="trailing" id="QNv-nb-2sY"/>
+                <constraint firstItem="Oqn-Jk-FMG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="RDl-Qe-VAj"/>
+                <constraint firstItem="Oqn-Jk-FMG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hIi-d3-kvw"/>
+            </constraints>
+            <size key="customSize" width="202" height="31"/>
+            <connections>
+                <outlet property="bannerView" destination="DIK-9X-l7a" id="Y0u-r1-tbB"/>
+            </connections>
+            <point key="canvasLocation" x="182" y="95"/>
+        </collectionViewCell>
+    </objects>
+</document>
