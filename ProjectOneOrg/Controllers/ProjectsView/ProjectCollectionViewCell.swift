@@ -82,8 +82,17 @@ class ProjectCollectionViewCell: UICollectionViewCell {
     var mxHeight : CGFloat = 0.0
     var reachedBottom = false
     var reachedTop = false
+    var alreadyDealed = false
     var projectViewHeight : CGFloat = 0.0
     var projectViewWidth : CGFloat = 0.0
+    
+    var cellHeight : CGFloat = 0.0
+    var cellWidth : CGFloat = 0.0
+    var contWidth : CGFloat = 0.0
+    var contheight : CGFloat = 0.0
+    var xPosition : CGFloat = 0.0
+    var yPosition : CGFloat = 0.0
+    var upHeight : CGFloat = 0.0
     
 
     
@@ -96,7 +105,8 @@ class ProjectCollectionViewCell: UICollectionViewCell {
         projectItemCollectionManager()
         projectMenuLocating()
         resetFilterButton()
-        updateFilterButton(firButton)
+        constructButton(firButton, "All", "NavBarColorActive", "Poppins-Medium", "NavBarColorActive" )
+        
         filterVideos()
         
     
@@ -107,11 +117,11 @@ class ProjectCollectionViewCell: UICollectionViewCell {
     func initSetting(){
         
         
-        projectItemCollection.isScrollEnabled = false
-        
-        
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        allProjectView.addGestureRecognizer(panGesture)
+//        projectItemCollection.isScrollEnabled = false
+//        
+//        
+//        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+//        allProjectView.addGestureRecognizer(panGesture)
         collapsedMaxHeight = collapsedView.frame.size.height
     
         setGradientFill(applyView: createProjectButton, cornerRadius: 13, colors: [UIColor(named: "grad1")?.cgColor,UIColor(named: "grad2")?.cgColor])
@@ -140,15 +150,13 @@ class ProjectCollectionViewCell: UICollectionViewCell {
     //MARK: - Scrolling Handle
     
     @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
-
+        
+        let velocity = gestureRecognizer.velocity(in: allProjectView)
         
         if gestureRecognizer.state == .began {
            //print(" Began ")
-            
             preDis = 0.0
             mxHeight = projectItemCollection.contentSize.height
-            
-            
         }
         
         if gestureRecognizer.state == .changed {
@@ -226,7 +234,33 @@ class ProjectCollectionViewCell: UICollectionViewCell {
         
         
         if gestureRecognizer.state == .ended {
-            //print(" Ended ")
+            print(" Ended ")
+            
+            let speed = sqrt(pow(velocity.x, 2) + pow(velocity.y, 2))
+            print("Speed: \(speed) points per second")
+            
+            
+            DispatchQueue.main.async {
+            
+               // self.projectItemCollection.isScrollEnabled = true
+            }
+//
+//            if speed > 0 {
+//                var distance = speed*0.3
+//                if upDirection == 2 {
+//                    distance *= (-1)
+//                } else  if upDirection == 1 {
+//                    
+//                    
+//    
+//                projectItemCollection.setContentOffset(CGPoint(x: 0, y: projectItemCollection.contentOffset.x+distance), animated: true )
+//                        
+//                    
+//                    
+//                }
+//                
+//            }
+            
             
             if reachedBottom {
                 let bottomOffset = CGPoint(x: 0, y: max( projectItemCollection.contentSize.height - projectItemCollection.bounds.size.height, 0))
@@ -253,7 +287,6 @@ class ProjectCollectionViewCell: UICollectionViewCell {
                 self.projectMenuCollection.reloadData()
                 
                 UIView.animate(withDuration: 0.3, animations: {
-                   
                     self.collapsedHeight.constant = self.collapsedMaxHeight
                     self.ProjectView.layoutIfNeeded()
                     self.quickActionButton.alpha = 1.0
@@ -279,9 +312,14 @@ class ProjectCollectionViewCell: UICollectionViewCell {
         actionToBack()
     }
     func actionToBack(){
-        DetailedView.isHidden = true
-        ProjectView.isHidden = false
-        delegate?.backToProjectFromDetails()
+            UIView.animate(withDuration: 0.3, animations: {
+                self.detailedContentView.transform = CGAffineTransform(scaleX: self.cellWidth/self.contWidth, y: self.cellHeight/self.contheight).concatenating(CGAffineTransform(translationX: self.xPosition-(self.contWidth/2)+(self.cellWidth/2), y: self.yPosition-self.upHeight-(self.contheight/2)+(self.cellHeight/2)))
+            }, completion: { [self]_ in
+                delegate?.backToProjectFromDetails()
+                DetailedView.isHidden = true
+                ProjectView.isHidden = false
+                detailedContentView.transform = .identity
+        })
     }
     
     
@@ -295,8 +333,6 @@ class ProjectCollectionViewCell: UICollectionViewCell {
         projectItemCollection.reloadData()
     }
     @IBAction func editButtonPressed(_ sender: UIButton) {
-       //scrollCollectionViewByDistance(10)
-        
         if projectItem.projectItemImage.count > 0 {
             
             initialView.isHidden = true
@@ -475,25 +511,36 @@ class ProjectCollectionViewCell: UICollectionViewCell {
     }
     @IBAction func filterTouchUp(_ sender: UIButton) {
         resetFilterButton()
-        updateFilterButton(sender)
+        var buttonTitle = "All"
+        if sender.tag == 1 {
+            buttonTitle =  "Screen Recording"
+        } else if sender.tag == 2 {
+            buttonTitle = "Video Projects"
+        }
+        constructButton(sender, buttonTitle , "NavBarColorActive", "Poppins-Medium", "NavBarColorActive" )
     }
     
-    func  updateFilterButton (_ btn : UIButton ){
-        btn.setTitleColor(UIColor(named: "NavBarColorActive"), for: .normal)
-        btn.layer.borderColor = UIColor(named: "NavBarColorActive")?.cgColor
+    func constructButton(_ btn : UIButton , _ t : String ,_ fontColor : String ,_ fontName : String ,_ buttonBorderColor : String ) {
+        let attributedText = NSMutableAttributedString(string: t )
+        let customFont = UIFont(name: fontName , size: 12.0)
+        attributedText.addAttribute(NSAttributedString.Key.font, value: customFont ?? UIFont(name: fontName, size: 12.0), range: NSRange(location: 0, length: attributedText.length))
+        let customColor = UIColor(named: fontColor )
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: customColor, range: NSRange(location: 0, length: attributedText.length))
+        btn.setAttributedTitle(attributedText,for: .normal)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        btn.backgroundColor = .clear
+        btn.layer.borderWidth = 1.5
+        btn.layer.cornerRadius = 16
+        btn.layer.borderColor = UIColor(named:  buttonBorderColor )?.cgColor
     }
+    
+
     func resetFilterButton() {
         let buttonList : [UIButton] = [firButton,secButton,tirButton]
         let buttonTitle : [String] = ["All", "Screen Recording", "Video Projects"]
         var i : Int = 0
         for btn in buttonList {
-            btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-            btn.setTitle(buttonTitle[i], for: .normal)
-            btn.setTitleColor(UIColor(named: "fontColorDark"), for: .normal)
-            btn.backgroundColor = .clear
-            btn.layer.borderWidth = 1.5
-            btn.layer.cornerRadius = 16
-            btn.layer.borderColor = UIColor(named: "borderFilter")?.cgColor
+            constructButton(btn, buttonTitle[i], "fontColorDark", "Poppins-Regular", "borderFilter" )
             i+=1
         }
     }
@@ -518,7 +565,7 @@ class ProjectCollectionViewCell: UICollectionViewCell {
         projectItemCollectionFlow.collectionView?.showsVerticalScrollIndicator = false
         projectItemCollectionFlow.collectionView?.showsHorizontalScrollIndicator = false
         projectItemCollectionFlow.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        projectItemCollectionFlow.minimumLineSpacing = 0
+        projectItemCollectionFlow.minimumLineSpacing = 16
         projectItemCollectionFlow.minimumInteritemSpacing = 0
     }
     func projectMenuCollectionManager(){
@@ -583,7 +630,10 @@ class ProjectCollectionViewCell: UICollectionViewCell {
     }
     @IBAction func viewButtonTouchUp(_ sender: UIButton) {
         viewListGrid.toggle()
+        
         projectItemCollection.reloadData()
+    
+      
         if viewListGrid {
             sender.setImage(UIImage(named: "grid"), for: .normal)
         } else {
@@ -665,8 +715,22 @@ extension ProjectCollectionViewCell : UICollectionViewDataSource, UICollectionVi
         }
     }
     
+   
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
+        
+        
         if collectionView == projectItemCollection {
+            
+            
+//            let frame = projectItemCollection.layoutAttributesForItem(at: indexPath)?.frame
+//            let cellPosition = projectItemCollection.convert(frame?.origin ?? .zero, to: projectItemCollection.superview)
+//            
+//            print(cellPosition , " YoCell ")
+            
+            
             let index  = getIndex(indexPath.row)
             if viewListGrid {
                 
@@ -736,9 +800,7 @@ extension ProjectCollectionViewCell : UICollectionViewDataSource, UICollectionVi
                 delegate?.showDetailedNavigation()
                 
                 let index = getIndex(indexPath.row)
-                
-                var cellHeight : CGFloat = 0.0
-                var cellWidth : CGFloat = 0.0
+
                 
                 if let cell = collectionView.cellForItem(at: indexPath) as? ProjectListItemCollectionViewCell {
                     if let imageView = cell.imageView{
@@ -747,14 +809,7 @@ extension ProjectCollectionViewCell : UICollectionViewDataSource, UICollectionVi
                     }
                 }
                 
-                if let cell = collectionView.cellForItem(at: indexPath) as? ProjectGridItemCollectionViewCell {
-                    if let imageView = cell.imageView{
-                        cellWidth = imageView.frame.width
-                        cellHeight = imageView.frame.height
-                    }
-                }
-                
-                
+
                 
                 detailedImageView.image = UIImage(named: projectItem.projectItemImage[index])
                 detailedTitle.text = projectItem.projectItemTitle[index]
@@ -764,19 +819,19 @@ extension ProjectCollectionViewCell : UICollectionViewDataSource, UICollectionVi
                 ProjectView.isHidden = true
                 
                 
-                var xPosition =  allProjectView.frame.origin.x
-                var yPosition =   allProjectView.frame.origin.y
+                xPosition =  allProjectView.frame.origin.x
+                yPosition =   allProjectView.frame.origin.y
                 
                 let frame = projectItemCollection.layoutAttributesForItem(at: indexPath)?.frame
                 let cellPosition = projectItemCollection.convert(frame?.origin ?? .zero, to: projectItemCollection.superview)
                 
-                let upHeight = upperView.frame.height
-                let contheight = detailedContentView.frame.height
-                let contWidth =  detailedContentView.frame.width
+                upHeight = upperView.frame.height
+                contheight = detailedContentView.frame.height
+                contWidth =  detailedContentView.frame.width
                 
                 xPosition += cellPosition.x
                 yPosition += cellPosition.y
-
+            
                 
                 
                 detailedContentView.transform = CGAffineTransform(scaleX: cellWidth/contWidth, y: cellHeight/contheight).concatenating(CGAffineTransform(translationX: xPosition-(contWidth/2)+(cellWidth/2), y: yPosition-upHeight-(contheight/2)+(cellHeight/2)))
@@ -805,22 +860,22 @@ extension ProjectCollectionViewCell : UICollectionViewDelegateFlowLayout {
             let w = ProjectView.layer.frame.width
             let h = ProjectView.layer.frame.height
             
-                    //print(" Flow  Delegate Info ")
+            //print(" Flow  Delegate Info ")
+            //   print(w,h)
             
-                     //   print(w,h)
             if viewListGrid {
-                return CGSize(width: w-32, height: h*104/759)
+                return CGSize(width: w-32, height: h*88/759)
             }
             
-            return CGSize(width: w*183/w, height: h*236/759)
+            return CGSize(width: w*183/w, height: h*212/759)
             
         } else if collectionView == projectMenuCollection {
          
             let w = ProjectView.layer.frame.width
-            let h = ProjectView.layer.frame.height
-            
+       
             //print(w*76/(w-4),h , " Debug with Menu ")
             return CGSize(width: w*76/(w-4), height: collectionView.layer.frame.height)
+            
         }
         
         return CGSize(width: 0, height: 0)
@@ -830,8 +885,93 @@ extension ProjectCollectionViewCell : UICollectionViewDelegateFlowLayout {
 extension ProjectCollectionViewCell : UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if scrollView == projectItemCollection {
-           // print("Scrolling started!")
+            print("Scrolling started!")
+            preDis = 0.0
+            reachedBottom == false
+            alreadyDealed = false
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == projectItemCollection {
+            
+            print(scrollView.contentOffset.y)
+            
+            if( scrollView.contentOffset.y  <= 0.0 && collapsedHeight.constant >=  162 ) {
+                upDirection = -1
+            } else {
+                
+                if collapsedHeight.constant >=  0 &&  scrollView.contentOffset.y > 0.0  {
+                    collapsedHeight.constant -= scrollView.contentOffset.y
+                    self.quickActionButton.alpha = collapsedHeight.constant / 162
+                    upDirection =  1
+                    scrollView.contentOffset = CGPoint(x: 0, y: 0)
+                } else if collapsedHeight.constant < 162 && scrollView.contentOffset.y < 0.0  {
+                    collapsedHeight.constant += (scrollView.contentOffset.y*(-1))
+                    self.quickActionButton.alpha = collapsedHeight.constant / 162
+                    upDirection =  2
+                    scrollView.contentOffset = CGPoint(x: 0, y: 0)
+                } else {
+                    if scrollView.contentOffset.y > preDis {
+                        upDirection =  1
+                    } else if scrollView.contentOffset.y < preDis  {
+                        upDirection =  2
+                    }
+                }
+                
+                preDis = scrollView.contentOffset.y
+                let contentHeight = scrollView.contentSize.height
+                let yOffset = scrollView.contentOffset.y
+                let scrollViewHeight = scrollView.frame.size.height
+                if yOffset + scrollViewHeight >= contentHeight {
+                    reachedBottom = true
+                }
+            }
+            
+        }
+    }
+    
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print(" Stopped Hereeeeeeee ")
+        alreadyDealed = true
+        print(upDirection, collapsedHeight.constant , reachedBottom , projectItemCollection.contentOffset.y, " Final details DEAC  ")
+        levelCollapsedView()
+        reachedBottom = false
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if alreadyDealed == false {
+            print("Ended Dragging ")
+            print(upDirection, collapsedHeight.constant , reachedBottom , projectItemCollection.contentOffset.y , " Final details END DRAG ")
+            levelCollapsedView()
+            
+            reachedBottom = false
+        }
+        
+    }
+    
+    
+    func levelCollapsedView(){
+        if upDirection == 1 && collapsedHeight.constant > 0 && reachedBottom == false{
+            print(" Up Move ")
+            UIView.animate(withDuration: 0.2 , animations: {
+                self.collapsedHeight.constant = 0
+                self.ProjectView.layoutIfNeeded()
+                self.quickActionButton.alpha = 0.0
+            })
+        } else if upDirection == 2  && collapsedHeight.constant < 162 && reachedBottom == false && projectItemCollection.contentOffset.y <= 0{
+            print("Down Move ")
+            UIView.animate(withDuration: 0.2 , animations: {
+                self.collapsedHeight.constant = 162
+                self.ProjectView.layoutIfNeeded()
+                self.quickActionButton.alpha = 1.0
+            })
+            projectMenuCollection.reloadData()
+        }
+    }
+    
+    
+    
 }
 

@@ -448,6 +448,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" name="backGround"/>
                         <constraints>
                             <constraint firstItem="IV1-0q-Mff" firstAttribute="top" secondItem="eaf-Ks-bmv" secondAttribute="bottom" id="4MM-kK-Ecp"/>
                             <constraint firstAttribute="trailing" secondItem="eaf-Ks-bmv" secondAttribute="trailing" id="FXg-Z9-Bxo"/>
@@ -467,6 +468,7 @@
                         <outlet property="bottomNavigationView" destination="uco-1s-Sy8" id="XXr-E9-Uvc"/>
                         <outlet property="bottomView" destination="Vxh-3b-DI3" id="b8z-Cu-7dF"/>
                         <outlet property="bottomViewHeight" destination="nEU-i1-Cxp" id="STh-ve-fFq"/>
+                        <outlet property="contentViewHeight" destination="3Bj-aF-N9R" id="mvk-hQ-z6R"/>
                         <outlet property="deleteButton" destination="TLY-WO-BBd" id="Nf1-u1-KYm"/>
                         <outlet property="deleteView" destination="wqH-wv-SeA" id="S2l-Od-MIt"/>
                         <outlet property="detailView" destination="Buk-Ue-5VC" id="TcH-Qd-Gnc"/>

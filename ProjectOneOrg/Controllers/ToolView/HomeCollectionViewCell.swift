@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import StoreKit
 
-class HomeCollectionViewCell: UICollectionViewCell{
+
+class HomeCollectionViewCell: UICollectionViewCell, SKStoreProductViewControllerDelegate{
     
     @IBOutlet weak var buttonOne : UIButton!
     @IBOutlet weak var buttonTwo : UIButton!
@@ -37,6 +39,10 @@ class HomeCollectionViewCell: UICollectionViewCell{
     var isAutoScrollingEnabled : Bool = true
     var autoscrollTimer: Timer?
     let urlString = "https://app.kinggamesstudio.net/api/admin/cross-promotions/1"
+    var delegate : DeleteProtocol?
+    var bannerCount = 100
+    var firstTerm : CGFloat = 0.0
+    var eachTerm : CGFloat = 0.0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -52,12 +58,24 @@ class HomeCollectionViewCell: UICollectionViewCell{
     
     @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
        
+        let velocity = gestureRecognizer.velocity(in: bannerView)
+                
         if gestureRecognizer.state == .began {
-           // print(" Paan Started ")
+            print(" Paan Started ")
             preDis = 0.0
             isAutoScrollingEnabled = false
             stopAutoscrolling()
             startDis = bannerCollectionView.contentOffset.x
+            
+            print(firstTerm,eachTerm)
+            
+            if Int(startDis-357)%376 != 0 {
+                print(" Yahooo return ing from Tap - ", startDis )
+                return
+            }
+            
+            
+            
         }
         
         if gestureRecognizer.state == .changed {
@@ -74,57 +92,67 @@ class HomeCollectionViewCell: UICollectionViewCell{
         }
         
         if gestureRecognizer.state == .ended {
-            //print(" Gesture ended ")
-            endDis = bannerCollectionView.contentOffset.x
             
-            let crossed = abs(endDis-startDis)
-            
-            //print(endDis , startDis , crossed , " Crossed " )
-            
-            var h : CGFloat = 0
             var w : CGFloat = 0
-            var contentWidth = bannerCollectionView.frame.size.width
+            let contentWidth = bannerCollectionView.frame.size.width
+            endDis = bannerCollectionView.contentOffset.x
             
             for indexPath in bannerCollectionView.indexPathsForVisibleItems {
                 if let cell = bannerCollectionView.cellForItem(at: indexPath) {
-                    h = cell.frame.height
                     w = cell.frame.width
                     break
                 }
             }
             
-            var vis = (contentWidth-w)/2 - 8
-            var temp = w/2
+            print(" Gesture ended ")
+            print(startDis, endDis)
             
+           
+            let speed = sqrt(pow(velocity.x, 2) + pow(velocity.y, 2))
+            print("Speed: \(speed) points per second")
             
-            if startDis < endDis {
-               // print(" left ")
-                
-                if (vis+crossed) >= temp {
-                    bannerCollectionView.setContentOffset(CGPoint(x: startDis+w, y: 0), animated: true )
+            if speed > 100 {
+                if startDis < endDis {
+                    nextBanner()
                 } else {
-                    bannerCollectionView.setContentOffset(CGPoint(x: startDis, y: 0), animated: true )
+                    previousBanner()
                 }
-            
             } else {
-                if (vis+crossed) >= temp {
-                    bannerCollectionView.setContentOffset(CGPoint(x: startDis-w, y: 0), animated: true )
+            
+                let crossed = abs(endDis-startDis)
+                let vis = (contentWidth-w)/2 - 8
+                let temp = w/2
+                
+                
+                if startDis < endDis  && (vis+crossed) >= temp  {
+                    nextBanner()
+                } else if startDis > endDis && (vis+crossed) >= temp {
+                    previousBanner()
                 } else {
-                    bannerCollectionView.setContentOffset(CGPoint(x: startDis, y: 0), animated: true )
+                    locateBanner()
                 }
+            
             }
-            
-            
-            //print("Cell at indexPath \(h) has frame: \(vis) , totalDis : \( vis+crossed )")
-            
-        
-            //print( bannerCollectionView.contentOffset.x  )
             
             
             isAutoScrollingEnabled = true
             startAutoscrolling()
             
         }
+    }
+    
+    func nextBanner(){
+        bannerCount += 1
+        locateBanner()
+    }
+    
+    func previousBanner(){
+        bannerCount -= 1
+        locateBanner()
+    }
+    
+    func locateBanner(){
+        bannerCollectionView.setContentOffset(CGPoint(x:   firstTerm+CGFloat(bannerCount)*eachTerm, y: 0), animated: true )
     }
     
     //MARK: - Auto Scroll
@@ -141,23 +169,11 @@ class HomeCollectionViewCell: UICollectionViewCell{
     
     
     @objc func autoscrolling() {
+        
         guard isAutoScrollingEnabled else {
             return
         }
-        
-        
-        let startOffset  = bannerCollectionView.contentOffset.x
-        
-        var w : CGFloat = 0
-        for indexPath in bannerCollectionView.indexPathsForVisibleItems {
-            if let cell = bannerCollectionView.cellForItem(at: indexPath) {
-                w = cell.frame.width
-                break
-            }
-        }
-        
-        bannerCollectionView.setContentOffset(CGPoint(x: startOffset+w, y: 0), animated: true )
-        
+        nextBanner()
     }
     
     
@@ -246,11 +262,18 @@ class HomeCollectionViewCell: UICollectionViewCell{
     func bannerLocating(){
         if bannerUIImage.count >= 2 {
             bannerCollectionView.scrollToItem(at: IndexPath(item: 100 , section: 0), at: .centeredHorizontally , animated: false )
-        
+            DispatchQueue.main.async {
+                var w : CGFloat = 0
+                for indexPath in self.bannerCollectionView.indexPathsForVisibleItems {
+                    if let cell = self.bannerCollectionView.cellForItem(at: indexPath) {
+                        w = cell.frame.width
+                        break
+                    }
+                }
+                self.firstTerm = self.bannerCollectionView.contentOffset.x - w*CGFloat(self.bannerCount)
+                self.eachTerm = w
+            }
         }
-        
-        //print(bannerCollectionView.contentOffset.x, bannerCollectionView.contentOffset.y , " banner locating ")
-    
     }
     
     func bannerCollectionManager(){
@@ -275,9 +298,9 @@ class HomeCollectionViewCell: UICollectionViewCell{
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 0.94
     
-        screenRecord.attributedText = NSMutableAttributedString(string: "SCREEN RECORDING", attributes: [NSAttributedString.Key.kern: 2.3, NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        screenRecord.attributedText = NSMutableAttributedString(string: "SCREEN RECORDING", attributes: [NSAttributedString.Key.kern: 0.48, NSAttributedString.Key.paragraphStyle: paragraphStyle])
         
-        screenRecord.font = UIFont(name: "Poppins-Light", size: 20 )
+        screenRecord.font = UIFont(name: "Poppins-Regular", size: 24 )
         screenRecord.textAlignment = .center
     }
     
@@ -326,7 +349,10 @@ class HomeCollectionViewCell: UICollectionViewCell{
             sender.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         })
     }
-
+    
+    
+    //MARK: - Show App Details
+    
 }
 
 //MARK: - Banner DataSource
@@ -364,16 +390,16 @@ extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewD
         }
         
       
+        delegate?.showAppDetails(appId: "899247664")
         
-        
-        if var safeURLString = bannerLink[index] {
-            //print(safeURLString)
-            let url = URL(string: safeURLString)
-            if let safeURL = url {
-               // print(safeURL)
-                UIApplication.shared.open(safeURL)
-            }
-        }
+//        if var safeURLString = bannerLink[index] {
+//            //print(safeURLString)
+//            let url = URL(string: safeURLString)
+//            if let safeURL = url {
+//               // print(safeURL)
+//                UIApplication.shared.open(safeURL)
+//            }
+//        }
         
     }
     

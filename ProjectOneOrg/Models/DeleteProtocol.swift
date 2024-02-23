@@ -12,5 +12,6 @@ protocol DeleteProtocol {
     func deleteit(_ deleteIndex: [Int],_ remaining : Int)
     func showDetailedNavigation()
     func backToProjectFromDetails()
+    func showAppDetails(appId: String)
 }
 

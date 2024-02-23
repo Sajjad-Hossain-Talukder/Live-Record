@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class ViewController: UIViewController , DeleteProtocol{
 
@@ -35,10 +36,12 @@ class ViewController: UIViewController , DeleteProtocol{
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var bottomViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
     var pageNavigation = 0
     var deletePressed : Bool = false
     var deleteOpen : Bool = false
     var deleteMode : Bool = true
+
     
     let navColor : [String] = ["buttonBackGround", "NavBarColorActive","buttonBackGround"]
    
@@ -150,7 +153,24 @@ class ViewController: UIViewController , DeleteProtocol{
         projectButton.setImage(UIImage(named: imT), for: .normal)
     }
     
+
     
+    func showAppDetails(appId: String) {
+        
+        let storeViewController = SKStoreProductViewController()
+        storeViewController.delegate = self
+        
+        let parameters = [SKStoreProductParameterITunesItemIdentifier: appId]
+        storeViewController.loadProduct(withParameters: parameters) { success, error in
+            if success {
+                self.present(storeViewController, animated: true,completion: nil)
+            } else {
+                print("Error: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }
+    }
+    
+
     func deleteit(_ deleteIndex: [Int] ,_ remaining : Int  ) {
         //print(deleteIndex, " Delete Them ")
     
@@ -171,15 +191,24 @@ class ViewController: UIViewController , DeleteProtocol{
         }
         
     }
+    
+    
     func showDetailedNavigation() {
         navigationView.isHidden = true
         deleteView.isHidden = true
         detailView.isHidden = false
+       
+     
         bottomViewHeight.constant = 0
+        //contentViewHeight.constant += (93/896 * self.wholeView.frame.height)
+        
+       //print(contentViewHeight.constant ,bottomViewHeight.constant , " content Height ")
+        
         self.wholeView.layoutIfNeeded()
 
         UIView.animate(withDuration: 0.3 , animations: {
             self.bottomViewHeight.constant =  93/896 * self.wholeView.frame.height
+            //self.bottomViewHeight.constant = 759/896 * self.wholeView.frame.height
             self.wholeView.layoutIfNeeded()
             
         })
@@ -259,13 +288,15 @@ extension ViewController : UICollectionViewDataSource , UICollectionViewDelegate
                 cell.selectButton.addTarget(self, action: #selector(addDeleteButton), for: .touchUpInside)
                 cell.cancelButton.addTarget(self, action: #selector(addDeleteButton), for: .touchUpInside)
                 cell.deleteTriggered(deletePressed,deleteMode)
+            
+                
                 cell.delegate = self
                 return cell
                 
             } else {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeCell", for: indexPath) as! HomeCollectionViewCell
                 cell.buttonSix.addTarget(self, action: #selector(buttonTappedInCollectionViewCell), for: .touchUpInside)
-            
+                cell.delegate = self
                 //print(indexPath.row , "HomeCollection View Cell")
                 
                 return cell
@@ -364,4 +395,8 @@ extension ViewController : UICollectionViewDelegateFlowLayout {
 
 
 
-
+extension ViewController: SKStoreProductViewControllerDelegate {
+    func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
+        viewController.dismiss(animated: true)
+    }
+}
