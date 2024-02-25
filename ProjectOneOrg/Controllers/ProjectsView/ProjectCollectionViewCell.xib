@@ -221,7 +221,7 @@
                                         <rect key="frame" x="0.0" y="44" width="414" height="118"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IS0-yN-koI">
-                                                <rect key="frame" x="4" y="0.0" width="410" height="118"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
                                                 <color key="backgroundColor" name="backGround"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8RD-gK-sUL">
                                                     <size key="itemSize" width="76" height="118"/>
@@ -232,12 +232,10 @@
                                             </collectionView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="IS0-yN-koI" secondAttribute="trailing" id="1Di-bc-siY"/>
-                                            <constraint firstItem="IS0-yN-koI" firstAttribute="top" secondItem="ibA-Ay-Pbm" secondAttribute="top" id="5FJ-H3-sZn"/>
-                                            <constraint firstItem="IS0-yN-koI" firstAttribute="width" secondItem="ibA-Ay-Pbm" secondAttribute="width" multiplier="0.990338" id="75q-h9-N9d"/>
-                                            <constraint firstAttribute="bottom" secondItem="IS0-yN-koI" secondAttribute="bottom" id="8Oa-7E-OIY"/>
-                                            <constraint firstItem="IS0-yN-koI" firstAttribute="leading" secondItem="ibA-Ay-Pbm" secondAttribute="leading" constant="4" id="8v6-na-tuR"/>
-                                            <constraint firstItem="IS0-yN-koI" firstAttribute="height" secondItem="ibA-Ay-Pbm" secondAttribute="height" id="Enq-pW-dgh"/>
+                                            <constraint firstAttribute="bottom" secondItem="IS0-yN-koI" secondAttribute="bottom" id="FNv-YU-zGs"/>
+                                            <constraint firstItem="IS0-yN-koI" firstAttribute="leading" secondItem="ibA-Ay-Pbm" secondAttribute="leading" id="NhS-c7-oG6"/>
+                                            <constraint firstAttribute="trailing" secondItem="IS0-yN-koI" secondAttribute="trailing" id="hX7-0q-55T"/>
+                                            <constraint firstItem="IS0-yN-koI" firstAttribute="top" secondItem="ibA-Ay-Pbm" secondAttribute="top" id="vHa-vK-C1k"/>
                                         </constraints>
                                     </view>
                                 </subviews>

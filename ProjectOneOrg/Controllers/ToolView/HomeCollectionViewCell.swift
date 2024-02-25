@@ -389,17 +389,21 @@ extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewD
             index = index % fetchElement
         }
         
-      
-        delegate?.showAppDetails(appId: "899247664")
         
-//        if var safeURLString = bannerLink[index] {
-//            //print(safeURLString)
+        if var safeURLString = bannerLink[index] {
+            print(safeURLString, index )
+            
+            let parts = safeURLString.components(separatedBy: "id")
+            if let partAfterID = parts.last {
+                print(partAfterID)
+                delegate?.showAppDetails(appId: partAfterID)
+            }
+            
 //            let url = URL(string: safeURLString)
 //            if let safeURL = url {
-//               // print(safeURL)
 //                UIApplication.shared.open(safeURL)
 //            }
-//        }
+        }
         
     }
     
